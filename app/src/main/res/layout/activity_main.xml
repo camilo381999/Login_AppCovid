@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,51 +9,72 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="936dp"
+        android:id="@+id/imageView"
+        android:layout_width="325dp"
+        android:layout_height="296dp"
+        android:layout_marginTop="24dp"
         android:layout_weight="1"
-        android:src="@mipmap/b" />
-    
+        android:src="@mipmap/b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/User"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="323dp"
+        android:layout_height="45dp"
         android:layout_margin="20dp"
+        android:layout_marginTop="32dp"
         android:layout_weight="1"
         android:hint="Usuario"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/Pass"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="323dp"
+        android:layout_height="45dp"
         android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/User" />
 
     <Button
         android:id="@+id/btnEntrar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
         android:layout_margin="20dp"
+        android:layout_marginTop="32dp"
         android:layout_weight="1"
         android:background="#000000"
         android:text="Entrar"
         android:textColor="#ffffff"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Pass" />
 
     <Button
         android:id="@+id/btnRegistrar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
         android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:background="#000000"
         android:text="Registrar"
         android:textColor="#ffffff"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

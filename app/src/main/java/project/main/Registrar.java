@@ -27,7 +27,7 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
         can=(Button)findViewById(R.id.btnRegCancelar);
         reg.setOnClickListener(this);
         can.setOnClickListener(this);
-        dao=new daoUsuario(this);
+        //dao=new daoUsuario(this);
     }
 
     @Override
@@ -40,18 +40,19 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
                 u.setNombre(nom.getText().toString());
                 u.setApellido(ap.getText().toString());
 
-                if (u.isNull()){
+                /*if (u.isNull()){
                     Toast.makeText(this,"Errorr: Campos vacios", Toast.LENGTH_LONG).show();
-                }else if(dao.insertUsuario(u)){
-                    
-                }
-
+                }else {
+                    Intent i=new Intent(Registrar.this,MainActivity.class);
+                    startActivity(i);
+                }*/
+                Intent b=new Intent(Registrar.this,MainActivity.class);
+                startActivity(b);
                 break;
 
             case R.id.btnRegCancelar:
                 Intent i=new Intent(Registrar.this,MainActivity.class);
                 startActivity(i);
-                finish();
                 break;
         }
     }

@@ -37,13 +37,13 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnMostrar"
+            android:id="@+id/btnReportar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="1"
             android:background="#000000"
-            android:text="Mostrar"
+            android:text="Reportar sintomas"
             android:textColor="#ffffff"
             android:textStyle="bold" />
 

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Mostrar"></activity>
+        <activity android:name=".ReprteDeSintomas"></activity>
+        <activity android:name=".Mostrar" />
         <activity android:name=".Inicio" />
         <activity android:name=".Editar" />
         <activity android:name=".Registrar" />
