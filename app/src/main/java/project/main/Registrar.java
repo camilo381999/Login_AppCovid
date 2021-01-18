@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class Registrar extends AppCompatActivity implements View.OnClickListener {
 
     EditText us,pas,nom,ap;
+    RadioButton hombre,mujer;
     Button reg,can;
     daoUsuario dao;
 
@@ -23,6 +25,8 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
         pas=(EditText)findViewById(R.id.RegPass);
         nom=(EditText)findViewById(R.id.RegNombre);
         ap=(EditText)findViewById(R.id.RegApellido);
+        hombre=(RadioButton)findViewById(R.id.RegRadbtnH);
+        hombre=(RadioButton)findViewById(R.id.RegRadbtnM);
         reg=(Button)findViewById(R.id.btnRegRegistrar);
         can=(Button)findViewById(R.id.btnRegCancelar);
         reg.setOnClickListener(this);
