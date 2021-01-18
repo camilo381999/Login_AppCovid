@@ -20,6 +20,7 @@ public class daoUsuario {
         sql = c.openOrCreateDatabase(bd, c.MODE_PRIVATE, null);
         sql.execSQL(tabla);
         u = new Usuario();
+
     }
 
     public boolean insertUsuario(Usuario u) {
