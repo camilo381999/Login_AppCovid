@@ -30,6 +30,12 @@ public class daoUsuario {
             cv.put("pass", u.getPassword());
             cv.put("nombre", u.getNombre());
             cv.put("ap", u.getApellido());
+            cv.put("dir",u.getDireccion());
+            cv.put("edad",u.getEdad());
+            cv.put("cedula",u.getCedula());
+            cv.put("genero",u.getGenero());
+
+
             return (sql.insert("usuario", null, cv) > 0);
         } else {
             return false;
@@ -53,12 +59,18 @@ public class daoUsuario {
         Cursor cr = sql.rawQuery("select * from usuario", null);
         if (cr != null && cr.moveToFirst()) {
             do {
+
                 Usuario u = new Usuario();
                 u.setId(cr.getInt(0));
                 u.setUsuario(cr.getString(1));
                 u.setPassword(cr.getString(2));
                 u.setNombre(cr.getString(3));
                 u.setApellido(cr.getString(4));
+                u.setGenero(cr.getString(5));
+                u.setDireccion(cr.getString(6));
+                u.setCedula(cr.getString(7));
+                u.setEdad(cr.getString(8));
+
                 lista.add(u);
             } while (cr.moveToNext());
         }

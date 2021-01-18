@@ -23,10 +23,10 @@ public class Usuario {
         this.apellido = apellido;
         this.usuario = usuario;
         this.password = password;
+        this.direccion = direccion;
         this.edad = edad;
         this.cedula = cedula;
         this.genero = genero;
-        this.direccion = direccion;
 
 
     }
