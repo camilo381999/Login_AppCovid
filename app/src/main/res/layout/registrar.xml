@@ -54,7 +54,8 @@
         android:layout_marginTop="24dp"
         android:layout_weight="1"
         android:hint="Edad"
-        android:inputType="textPersonName"
+        
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toEndOf="@+id/radioGroup2"
@@ -89,7 +90,7 @@
         android:layout_margin="20dp"
         android:layout_marginTop="24dp"
         android:hint="Numero de cedula"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />

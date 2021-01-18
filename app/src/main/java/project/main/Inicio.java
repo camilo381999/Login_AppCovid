@@ -23,11 +23,9 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnEditar:
-
                 break;
 
             case R.id.btnEliminar:
-
                 break;
 
             case R.id.btnReportar:

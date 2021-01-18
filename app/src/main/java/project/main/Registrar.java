@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 public class Registrar extends AppCompatActivity implements View.OnClickListener {
 
-    EditText us,pas,nom,ap;
-    RadioButton hombre,mujer;
+    EditText us,pas,nom,ap,dir,ced,edad;
+    RadioButton genero;
     Button reg,can;
     daoUsuario dao;
 
@@ -25,14 +25,19 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
         pas=(EditText)findViewById(R.id.RegPass);
         nom=(EditText)findViewById(R.id.RegNombre);
         ap=(EditText)findViewById(R.id.RegApellido);
-        hombre=(RadioButton)findViewById(R.id.RegRadbtnH);
-        hombre=(RadioButton)findViewById(R.id.RegRadbtnM);
+        dir=(EditText)findViewById(R.id.RegDireccion);
+        ced=(EditText)findViewById(R.id.RegCedula);
+        edad=(EditText)findViewById(R.id.RegEdad);
+
+
+        genero=(RadioButton)findViewById(R.id.RegRadbtnH);
         reg=(Button)findViewById(R.id.btnRegRegistrar);
         can=(Button)findViewById(R.id.btnRegCancelar);
         reg.setOnClickListener(this);
         can.setOnClickListener(this);
         //dao=new daoUsuario(this);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -43,6 +48,16 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
                 u.setPassword(pas.getText().toString());
                 u.setNombre(nom.getText().toString());
                 u.setApellido(ap.getText().toString());
+                u.setDireccion(dir.getText().toString());
+                u.setEdad(edad.getText().toString());
+                u.setCedula(ced.getText().toString());
+
+                if (genero.isChecked()==true){
+                    u.setGenero("Hombre");
+
+                }else{
+                    u.setGenero("Mujer");
+                }
 
                 /*if (u.isNull()){
                     Toast.makeText(this,"Errorr: Campos vacios", Toast.LENGTH_LONG).show();
@@ -60,4 +75,5 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
                 break;
         }
     }
+
 }
