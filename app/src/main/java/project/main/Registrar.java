@@ -79,7 +79,6 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
                 ed=(etEd.getText().toString());
                 cedu=(etCed.getText().toString());
 
-                System.out.print("Toma valores");
                 //Obtener dato radioButton
                 if (genero.isChecked()==true){
                     generoS="Hombre";
