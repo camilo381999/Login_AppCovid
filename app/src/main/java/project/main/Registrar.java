@@ -18,9 +18,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Registrar extends AppCompatActivity implements View.OnClickListener {
 
-    EditText us,pas,nom,ap,dir,ced,edad;
+    EditText etUs,etPass,etNom,etAp,etDir,etCed,etEd;
     RadioButton genero;
     Button reg,can;
 
@@ -32,12 +35,10 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
     String dire="";
     String cedu="";
     String ed="";
+    String estado="negativo";
 
     FirebaseAuth mAuth;
     DatabaseReference nDatabase;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,14 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
 
         mAuth=FirebaseAuth.getInstance();
         nDatabase=FirebaseDatabase.getInstance().getReference();
+
+        etUs=(EditText)findViewById(R.id.RegUser);
+        etEd=(EditText)findViewById(R.id.RegEdad);
+        etCed=(EditText)findViewById(R.id.RegCedula);
+        etDir=(EditText)findViewById(R.id.RegDireccion);
+        etNom=(EditText)findViewById(R.id.RegNombre);
+        etAp=(EditText)findViewById(R.id.RegApellido);
+        etPass=(EditText)findViewById(R.id.RegPass);
 
         genero=(RadioButton)findViewById(R.id.RegRadbtnH);
         reg=(Button)findViewById(R.id.btnRegRegistrar);
@@ -60,29 +69,17 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
         switch (v.getId()){
             case R.id.btnRegRegistrar:
 
-
                 //Firebase
 
-                usu=(us.getText().toString());
-                pass=(pas.getText().toString());
-                nomb=(nom.getText().toString());
-                ape=(ap.getText().toString());
-                dire=(dir.getText().toString());
-                ed=(edad.getText().toString());
-                cedu=(ced.getText().toString());
+                usu=(etUs.getText().toString());
+                pass=(etPass.getText().toString());
+                nomb=(etNom.getText().toString());
+                ape=(etAp.getText().toString());
+                dire=(etDir.getText().toString());
+                ed=(etEd.getText().toString());
+                cedu=(etCed.getText().toString());
 
-                if (usu.isEmpty()&&pass.isEmpty()&&nomb.isEmpty()&&
-                        ape.isEmpty()&&dire.isEmpty()&&ed.isEmpty()&&cedu.isEmpty()){
-                    if (pass.length()>=6){
-                        registerUser();
-                    }else {
-                        Toast.makeText(this,"La contraseña debe tener 6 caracteres", Toast.LENGTH_LONG).show();
-                    }
-
-                }else {
-                    Toast.makeText(this,"Debe completar la información", Toast.LENGTH_LONG).show();
-                }
-
+                System.out.print("Toma valores");
                 //Obtener dato radioButton
                 if (genero.isChecked()==true){
                     generoS="Hombre";
@@ -92,9 +89,19 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
                 }
 
 
-                Intent b=new Intent(Registrar.this,MainActivity.class);
-                startActivity(b);
-                break;
+                if (!usu.equals("")&&!pass.equals("")&&!nomb.equals("")&&
+                        !ape.equals("")&&!dire.equals("")&&!ed.equals("")&&!cedu.equals("")){
+
+                    if (pass.length()>=6){
+                        registerUser();
+                    }else {
+                        Toast.makeText(this,"La contraseña debe tener 6 caracteres", Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    Toast.makeText(this,"Debe completar la información", Toast.LENGTH_LONG).show();
+                }
+
+                 break;
 
             case R.id.btnRegCancelar:
                 Intent i=new Intent(Registrar.this,MainActivity.class);
@@ -108,6 +115,29 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    Map<String,Object> map = new HashMap<>();
+                    map.put("nombre",nomb);
+                    map.put("apellido",ape);
+                    map.put("genero",generoS);
+                    map.put("cedula",cedu);
+                    map.put("edad",ed);
+                    map.put("correo",usu);
+                    map.put("password",pass);
+                    map.put("estado",estado);
+
+                    String id= mAuth.getCurrentUser().getUid(); // Obtiene id que da firebase
+                    nDatabase.child("Users").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task2) {
+                            if (task2.isSuccessful()){
+                                startActivity(new Intent(Registrar.this,Inicio.class));
+                                finish();
+                            }else{
+                                Toast.makeText(Registrar.this,"No se crearon los datos :c", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
 
                 }else{
                     Toast.makeText(Registrar.this,"No se pudo registrar este usuario", Toast.LENGTH_LONG).show();
