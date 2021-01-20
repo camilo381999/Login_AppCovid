@@ -57,14 +57,18 @@ public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClick
 
                 if (checkEstado().equals("Positivo")){
                     Toast.makeText(this,"Tome cuarentena", Toast.LENGTH_LONG).show();
+                    Intent i=new Intent(ReprteDeSintomas.this,Inicio.class);
+                    startActivity(i);
                 } else {
                     Toast.makeText(this,"No posee riesgo", Toast.LENGTH_LONG).show();
-
+                    Intent i=new Intent(ReprteDeSintomas.this,Inicio.class);
+                    startActivity(i);
                 }
                 //Firebase
-
-                otro=(etOtro.getText().toString());
+               // otro=(etOtro.getText().toString());
                         //registerSintomas();
+
+
 
                 break;
         }
@@ -78,6 +82,8 @@ public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClick
 
 
     public  int revisarSintomas(){
+
+        puntaje = 0;
 
         if(cbFiebre.isChecked() == true){
             puntaje++;
