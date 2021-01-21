@@ -25,16 +25,6 @@
             android:textColor="#ffffff"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnEliminar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="#000000"
-            android:text="Ver zona"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnReportar"
@@ -43,7 +33,7 @@
             android:layout_margin="3dp"
             android:layout_weight="1"
             android:background="#000000"
-            android:text="Reportar sintomas"
+            android:text="Ver usuarios"
             android:textColor="#ffffff"
             android:textStyle="bold" />
 
@@ -66,12 +56,12 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Hola! Usuario" />
+        android:text="Hola! Administrado" />
 
     <ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="0.2"
-    android:src="@mipmap/a"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:src="@mipmap/ad"/>
 
 </LinearLayout>

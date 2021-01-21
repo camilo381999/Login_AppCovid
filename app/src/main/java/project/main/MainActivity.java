@@ -49,9 +49,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnEntrar:
 
                 if((!usuario.equals("")) && (!contraseña.equals(""))){
-                    //if(usuario.equals("correo@mail.com") && contraseña.equals("admin")){
+
+                    if(usuario.equals("administrador@gmail.com") && contraseña.equals("123456")){
+                        Toast.makeText(this,"Administrador", Toast.LENGTH_LONG).show();
+                        loginAdmin();
+
+                    } else{
                         loginUser();
-                    //}
+                    }
+
                 }else {
                     Toast.makeText(this,"Error: Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
                 }
@@ -80,6 +86,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     });
+    }
 
+    private void loginAdmin(){
+        mAuth.signInWithEmailAndPassword(usuario,contraseña).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    startActivity(new Intent(MainActivity.this,LoginAdmin.class));
+                    finish();
+                }else {
+                    Toast.makeText(MainActivity.this, "Error: Usuario o Contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
