@@ -28,8 +28,8 @@ public class LoginAdmin extends AppCompatActivity  implements View.OnClickListen
         btnSalirAdmin=(Button)findViewById(R.id.btnSalirAdmin);
         btnSalirAdmin.setOnClickListener(this);
 
-        btnEditarAdmin=(Button)findViewById(R.id.btnEditarAdmin);
-        btnEditarAdmin.setOnClickListener(this);
+        btnVerUsers=(Button)findViewById(R.id.btnVerUsuarios);
+        btnVerUsers.setOnClickListener(this);
 
     }
 
@@ -42,6 +42,8 @@ public class LoginAdmin extends AppCompatActivity  implements View.OnClickListen
                 break;
 
             case R.id.btnVerUsuarios:
+                Intent i2=new Intent(LoginAdmin.this,Mostrar.class);
+                startActivity(i2);
                 break;
 
 

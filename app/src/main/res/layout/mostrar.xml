@@ -16,11 +16,14 @@
         android:gravity="center"
         android:text="Usuarios existentes" />
 
-    <ListView
-        android:id="@+id/lista"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewInforme"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.15">
-    </ListView>
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 
 </LinearLayout>
