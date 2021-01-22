@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="project.main">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".LoginAdmin"></activity>
+        <activity android:name=".Ubicacion"></activity>
+        <activity android:name=".LoginAdmin" />
         <activity android:name=".ReprteDeSintomas" />
         <activity android:name=".Mostrar" />
         <activity android:name=".Inicio" />

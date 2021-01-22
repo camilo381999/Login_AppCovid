@@ -34,6 +34,9 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener{
         btnRepSintomas=(Button)findViewById(R.id.btnReportar);
         btnRepSintomas.setOnClickListener(this);
 
+        btnEliminar=(Button)findViewById(R.id.btnEliminar);
+        btnEliminar.setOnClickListener(this);
+
         btnSalir=(Button)findViewById(R.id.btnSalir);
         btnSalir.setOnClickListener(this);
 
@@ -56,6 +59,8 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.btnEliminar:
+                Intent i3=new Intent(Inicio.this,Ubicacion.class);
+                startActivity(i3);
                 break;
 
             case R.id.btnReportar:
