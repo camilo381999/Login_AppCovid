@@ -3,6 +3,8 @@ package project.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -77,9 +79,11 @@ public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClick
             personaMap.put("estado", "Positivo");
             mDatabase.child("Users").child(id).updateChildren(personaMap);
 
-            Toast.makeText(this, "Tome cuarentena", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(ReprteDeSintomas.this, Inicio.class);
-            startActivity(i);
+            //Toast.makeText(this, "Tome cuarentena", Toast.LENGTH_LONG).show();
+
+            showMessage();
+
+
         } else {
             estado ="Negativo";
             personaMap.put("estado", "Negativo");
@@ -106,6 +110,19 @@ public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClick
         return estado;
     }
 
+    public void showMessage(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("ALERTA");
+        builder.setMessage("De acuerdo con los datos suministrados, usted puede ser portador del virus. Por favor inicie aislamiento y espere a que se le comunique la fecha de toma del examen.");
+        builder.setIcon(R.mipmap.alerta);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent i = new Intent(ReprteDeSintomas.this, Inicio.class);
+                startActivity(i);
+            }
+        });
+        builder.show();
+    }
 
     String cedula;
     String correo;
@@ -148,7 +165,7 @@ public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClick
             puntaje++;
         }
         if(siNo.isChecked() == true){
-           puntaje= puntaje+4;
+            puntaje= puntaje+4;
         }
         return puntaje;
     }
