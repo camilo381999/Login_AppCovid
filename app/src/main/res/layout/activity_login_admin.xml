@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnEditar"
+            android:id="@+id/btnEditarAdmin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
@@ -27,7 +27,7 @@
 
 
         <Button
-            android:id="@+id/btnReportar"
+            android:id="@+id/btnVerUsuarios"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
@@ -38,7 +38,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnSalir"
+            android:id="@+id/btnSalirAdmin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
@@ -56,7 +56,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Hola! Administrado" />
+        android:text="Hola! Administrador" />
 
     <ImageView
         android:layout_width="match_parent"

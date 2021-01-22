@@ -60,7 +60,7 @@
         android:layout_margin="20dp"
         android:layout_weight="1"
         android:background="#000000"
-        android:text="Registrar"
+        android:text="Actualizar"
         android:textColor="#ffffff"
         android:textSize="30dp"
         android:textStyle="bold"/>

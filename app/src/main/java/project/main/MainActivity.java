@@ -53,11 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(usuario.equals("administrador@gmail.com") && contraseña.equals("123456")){
                         Toast.makeText(this,"Administrador", Toast.LENGTH_LONG).show();
                         loginAdmin();
-
-                    } else{
-                        loginUser();
-                    }
-
+                    }else
+                    loginUser();
                 }else {
                     Toast.makeText(this,"Error: Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
                 }
