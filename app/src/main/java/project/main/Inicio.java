@@ -82,7 +82,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener{
                     String name= snapshot.child("nombre").getValue().toString();
                     String cedula= snapshot.child("cedula").getValue().toString();
                     String estado= snapshot.child("estado").getValue().toString();
-
                     textViewName.setText(name);
                 }
 

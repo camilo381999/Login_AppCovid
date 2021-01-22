@@ -16,73 +16,117 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClickListener {
     EditText etOtro;
-    CheckBox cbFiebre,cbTos,cbDolor,cbRespiracion,cbOlfato,cbOpecho;
+    CheckBox cbFiebre, cbTos, cbDolor, cbRespiracion, cbOlfato, cbOpecho;
     RadioButton siNo;
     Button enviar;
     int puntaje;
     String otro;
-    String estado="";
+    String estado = "";
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reprte_de_sintomas);
 
-        enviar=(Button)findViewById(R.id.btnEnviarForm);
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
-        cbFiebre=(CheckBox)findViewById(R.id.cbFiebre);
-        cbTos=(CheckBox)findViewById(R.id.cbTos);
-        cbDolor=(CheckBox)findViewById(R.id.cbDolor);
-        cbRespiracion=(CheckBox)findViewById(R.id.cbRespiracion);
-        cbOlfato=(CheckBox)findViewById(R.id.cbOlfato);
-        cbOpecho=(CheckBox)findViewById(R.id.cbOPecho);
-        siNo=(RadioButton)findViewById(R.id.RegRadbtnSi);
+        etOtro = (EditText) findViewById(R.id.etOtros);
+        cbFiebre = (CheckBox) findViewById(R.id.cbFiebre);
+        cbTos = (CheckBox) findViewById(R.id.cbTos);
+        cbDolor = (CheckBox) findViewById(R.id.cbDolor);
+        cbRespiracion = (CheckBox) findViewById(R.id.cbRespiracion);
+        cbOlfato = (CheckBox) findViewById(R.id.cbOlfato);
+        cbOpecho = (CheckBox) findViewById(R.id.cbOPecho);
+        siNo = (RadioButton) findViewById(R.id.RegRadbtnSi);
+        enviar = (Button) findViewById(R.id.btnEnviarForm);
         enviar.setOnClickListener(this);
+        obtenerInfoDB();
     }
 
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
-            case R.id.btnEnviarForm:
+        //Fecha del sistema
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = dateFormat.format(date) + "";
 
-                if (checkEstado().equals("Positivo")){
-                    Toast.makeText(this,"Tome cuarentena", Toast.LENGTH_LONG).show();
-                    Intent i=new Intent(ReprteDeSintomas.this,Inicio.class);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(this,"No posee riesgo", Toast.LENGTH_LONG).show();
-                    Intent i=new Intent(ReprteDeSintomas.this,Inicio.class);
-                    startActivity(i);
+        otro = (etOtro.getText().toString());
+
+        String id = mAuth.getCurrentUser().getUid();
+        Map<String, Object> personaMap = new HashMap<>();
+        if (checkEstado().equals("Positivo")) {
+
+            personaMap.put("estado", "Positivo");
+            mDatabase.child("Users").child(id).updateChildren(personaMap);
+
+            Toast.makeText(this, "Tome cuarentena", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(ReprteDeSintomas.this, Inicio.class);
+            startActivity(i);
+        } else {
+            estado ="Negativo";
+            personaMap.put("estado", "Negativo");
+            mDatabase.child("Users").child(id).updateChildren(personaMap);
+
+            Toast.makeText(this, "No posee riesgo", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(ReprteDeSintomas.this, Inicio.class);
+            startActivity(i);
+        }
+
+        Map<String, Object> datosInforme = new HashMap<>();
+        datosInforme.put("cedula", cedula);
+        datosInforme.put("correo", correo);
+        datosInforme.put("puntaje", puntaje);
+        datosInforme.put("fecha", fecha);
+        datosInforme.put("estado", estado);
+        mDatabase.child("Informes").child(id).updateChildren(datosInforme);
+    }
+
+    public String checkEstado() {
+        if (revisarSintomas() >= 4) {
+            estado = "Positivo";
+        }
+        return estado;
+    }
+
+
+    String cedula;
+    String correo;
+    private void obtenerInfoDB(){
+        String id= mAuth.getCurrentUser().getUid();
+        mDatabase.child("Users").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    cedula= snapshot.child("cedula").getValue().toString();
+                    correo= snapshot.child("correo").getValue().toString();
                 }
-                //Firebase
-               // otro=(etOtro.getText().toString());
-                        //registerSintomas();
+            }
 
-
-
-                break;
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
-    public  String checkEstado(){
-        if (revisarSintomas()>=4){
-            estado="Positivo";
-        }
-        return  estado;
-    }
-
 
     public  int revisarSintomas(){
-
         puntaje = 0;
 
         if(cbFiebre.isChecked() == true){
@@ -90,19 +134,15 @@ public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClick
         }
         if(cbTos.isChecked() == true){
             puntaje++;
-
         }
         if(cbDolor.isChecked() == true){
             puntaje++;
-
         }
         if(cbRespiracion.isChecked() == true){
             puntaje++;
-
         }
         if(cbOlfato.isChecked() == true){
             puntaje++;
-
         }
         if(cbOpecho.isChecked() == true){
             puntaje++;
@@ -110,7 +150,6 @@ public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClick
         if(siNo.isChecked() == true){
            puntaje= puntaje+4;
         }
-
         return puntaje;
     }
 
