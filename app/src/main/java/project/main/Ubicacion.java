@@ -38,7 +38,7 @@ public class Ubicacion extends AppCompatActivity {
                 LocationListener locationListener = new LocationListener() {
                     public void onLocationChanged(Location location) {
                         // Called when a new location is found by the network location provider.
-                        tvUbicacion.setText("" + location.getLongitude()+" "+ location.getLongitude());
+                        tvUbicacion.setText("" + location.getLatitude()+" "+ location.getLongitude());
                     }
 
                     public void onStatusChanged(String provider, int status, Bundle extras) {}
