@@ -83,7 +83,6 @@ public class ReprteDeSintomas extends AppCompatActivity  implements View.OnClick
 
             showMessage();
 
-
         } else {
             estado ="Negativo";
             personaMap.put("estado", "Negativo");
